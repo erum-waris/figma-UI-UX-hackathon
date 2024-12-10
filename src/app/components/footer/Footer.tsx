@@ -36,7 +36,7 @@ const FooterHeading = ({ name }: { name: string }) => {
 
 const Footer = () => {
   return (
-    <div className="relative md:w-[1440px] md:h-[300] w-[390px] h-[720px] bottom-4 bg-[#2A254B] gap-8 md:py-[6rem] md:px-[2rem]">
+    <div className="relative bottom-4 md:w-[1440px] md:h-[650px] w-[390px] h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[1rem] md:px-[2rem]">
       <div className="flex flex-col lg:flex-row md:border-b md:border-[#4e4d93] ">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 md:gap-[4rem]">
           <div>
@@ -70,31 +70,32 @@ const Footer = () => {
           <div className="ml-8 md:ml-0">
             <FooterHeading name="Join our mailing list" />
           </div>
-          <div className="mt-4 flex justify-center pb-6 border-b border-[#4e4d93] md:border-darkPrimary">
+          <div className="mt-4 flex justify-center pb-6 border-b border-[#4e4d93]">
             <input
               type="email"
               placeholder="your@email.com"
               className="bg-white bg-opacity-[15%] placeholder:font-satoshi focus:outline-none py-4 px-5 placeholder:text-white md:w-[500px]"
             />
-            <button className="px-[32px] py-[16px] bg-white text-[#2A254B] font-satoshi font-normal leading-6 hover:bg-navbarColor hover:text-lightGray">
+            <button className="px-[32px] py-[16px] bg-white text-[#2A254B] font-satoshi font-normal md:text-xl leading-6 hover:bg-[#7dcae8] hover:text-[#291b1b]">
               Sign up
             </button>
           </div>
         </div>
       </div>
-      <div className="md:flex md:justify-between">
-        <p className="text-center  font-satoshi font-normal leading-[18.9px] text-white mt-6 md:text-lg md:mt-8">
-          Copyright 2022 Avion LTD
-        </p>
-        <div className="hidden md:flex mt-10 mr-4 gap-3">
-          <FaLinkedin className="w-[24px] h-[24px] text-white" />
-          <FaFacebookSquare className="w-[24px] h-[24px] text-white" />
-          <FaInstagram className="w-[24px] h-[24px] text-white" />
-          <FaSkype className="w-[24px] h-[24px] text-white" />
-          <FaTwitter className="w-[24px] h-[24px] text-white" />
-          <FaPinterest className="w-[24px] h-[24px] text-white" />
-        </div>
-      </div>
+      <div className="flex flex-col lg:flex-row lg:justify-between mt-2 ">
+  <p className="text-center font-satoshi font-normal leading-[18.9px] text-white md:text-lg md:mt-8">
+    Copyright 2022 Avion LTD
+  </p>
+  <div className="flex mt-10 md:ml-4 gap-3 justify-center lg:justify-between items-center">
+    <FaLinkedin className="w-[24px] h-[24px] text-white" />
+    <FaFacebookSquare className="w-[24px] h-[24px] text-white" />
+    <FaInstagram className="w-[24px] h-[24px] text-white" />
+    <FaSkype className="w-[24px] h-[24px] text-white" />
+    <FaTwitter className="w-[24px] h-[24px] text-white" />
+    <FaPinterest className="w-[24px] h-[24px] text-white" />
+  </div>
+</div>
+
     </div>
   );
 };
