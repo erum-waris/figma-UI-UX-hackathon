@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
+
 const CeramicsSection = () => {
   return (
     <>
@@ -71,6 +72,7 @@ const CeramicsSection = () => {
               </div>
             </div>
           </div>
+      
 
           {/* View Collection Button */}
           <div className="my-10 flex justify-center items-center">

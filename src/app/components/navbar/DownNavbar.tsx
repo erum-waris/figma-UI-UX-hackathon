@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import NavbarLinks from "./NavbarLinks";
 import { CiSearch } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
 
 function DownNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,8 +16,20 @@ function DownNavbar() {
       {/* Desktop Navbar */}
       <div className="hidden sm:p-3 md:flex md:justify-center md:items-center px-6 py-4">
         {/* Centered Links */}
-        <ul className="flex gap-8 text-[#726E8D]  text-[1.5rem] font-400">
+        
+        <ul className="flex gap-8 text-[#726E8D]  text-[1.2rem] font-400">
+        
         <li>
+            <NavbarLinks href="/" title="Home" />
+          </li>
+          <li>
+            <NavbarLinks href="/about" title="About" />
+          </li>
+          <li>
+            <NavbarLinks href="/productlisting" title="ProductsListing" />
+          </li>
+        
+          <li>
             <NavbarLinks href="/" title="Plant pots" />
           </li>
           <li>
@@ -46,6 +60,7 @@ function DownNavbar() {
 
         {/* Hamburger and Search */}
         <div className="flex items-center gap-5">
+
           <span className="text-[24px] text-black cursor-pointer">
             <CiSearch />
           </span>
@@ -75,8 +90,22 @@ function DownNavbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
+        
         <ul className="flex flex-col items-center bg-white text-black text-xl py-6 gap-5 md:hidden">
+          <span className='flex gap-[24px] text-[2rem] mb-[20px]'>
+            
+             <IoCartOutline /> <FaRegUserCircle />  </span>
           <li>
+            <NavbarLinks href="/" title="Home" />
+          </li>
+          <li>
+            <NavbarLinks href="/about" title="About" />
+          </li>
+          <li>
+            <NavbarLinks href="/productlisting" title="ProductsListing" />
+          </li>
+        
+        <li>
             <NavbarLinks href="/home" title="Plant pots" />
           </li>
           <li>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import ProductsCard from "./product-listing/ProductsCard";
 
 function Products() {
   return (
@@ -48,6 +49,7 @@ function Products() {
             </div>
         </div>
       </div>
+
       <div className="my-10 flex justify-center items-center">
             <button className="font-satoshi bg-[#F9F9F9] py-4 px-6 rounded-[5px] hover:bg-[#2A254B] hover:text-white text-[#2A254B]">
               View collection
