@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import ProductsCard from "./product-listing/ProductsCard";
+
 
 function Products() {
   return (
