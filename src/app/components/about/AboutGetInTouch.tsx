@@ -24,10 +24,10 @@ function AboutGetInTouchSection() {
             Our service isn’t just personal, it’s actually
             hyper personally exquisite
             </h2>
-            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-3">
+            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-3 px-5">
             When we started Avion, the idea was simple. Make high quality furniture affordable and available for the mass market.
             </p>
-            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-2">
+            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-2 px-5">
             Handmade, and lovingly crafted furniture and homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for the London interior design community.
         </p>
         <div className="relative flex md:top-[4.5rem] justify-start">

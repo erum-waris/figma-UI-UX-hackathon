@@ -25,7 +25,9 @@ function AboutSection() {
         <AboutGetInTouchSection/>
         <AboutBrandSection/>
         
-        <SignUp/>
+      <div className='mb-[80px] md:mb-0'>
+      <SignUp/>
+      </div>
 
    
     </section>
