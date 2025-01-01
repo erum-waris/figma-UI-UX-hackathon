@@ -36,8 +36,8 @@ const FooterHeading = ({ name }: { name: string }) => {
 
 const Footer = () => {
   return (
-    <div className="mx-auto relative bottom-4 md:w-[1440px] md:h-[650px] w-[390px] h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[1rem] md:px-[2rem]">
-      <div className="flex flex-col lg:flex-row md:border-b md:border-[#4e4d93] ">
+    <div className="mx-auto relative bottom-4 md:w-[1440px] sm:h-[750px] md:h-[850px] lg:h-[650px] w-[390px] h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[3rem] md:px-[2rem]">
+      <div className="flex flex-col md:flex-wrap lg:flex-row md:border-b md:border-[#4e4d93] ">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 md:gap-[4rem]">
           <div>
             <FooterHeading name="Categories" />
@@ -66,11 +66,11 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="md:relative md:left-[4rem] md:top-[3rem]">
-          <div className="ml-8 md:ml-0">
+        <div className=" md:flex md:flex-col md:relative md:left-[4rem] md:top-[1rem] lg:top-[3rem] m-4">
+          <span className="ml-8 md:ml-0 lg:mb-[2rem]">
             <FooterHeading name="Join our mailing list" />
-          </div>
-          <div className="mt-4 flex justify-center pb-6 border-b border-[#4e4d93]">
+          </span>
+          <div className="mt-4 sm:mt-[-30px] flex justify-center ">
             <input
               type="email"
               placeholder="your@email.com"
@@ -82,11 +82,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:justify-between mt-2 ">
+      <div className="flex justify-center md:flex-row md:justify-between md:mr-5 md:pt-6 lg:flex-row lg:justify-between mt-5 ">
   <p className="text-center font-satoshi font-normal leading-[18.9px] text-white md:text-lg md:mt-8">
     Copyright 2022 Avion LTD
   </p>
-  <div className="flex mt-10 md:ml-4 gap-3 justify-center lg:justify-between items-center">
+  <div className="hidden md:flex mt-10 md:ml-4 gap-3 justify-center lg:justify-between items-center">
     <FaLinkedin className="w-[24px] h-[24px] text-white" />
     <FaFacebookSquare className="w-[24px] h-[24px] text-white" />
     <FaInstagram className="w-[24px] h-[24px] text-white" />

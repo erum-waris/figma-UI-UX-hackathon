@@ -10,7 +10,7 @@ function FeaturesSection() {
             <h2 className="font-clash text-[20px] md:text-[28px] leading-[28px] md:leading-[36px] py-10 px-6  md:w-[514px] ">
               From a studio in London to a global brand with over 400 outlets
             </h2>
-            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-3">
+            <p className="font-satoshi leading-[21px] font-normal text-[#505977] text-[14px] md:w-[570px] md:text-lg md:mt-3 m-5">
           When we started Avion, the idea was simple. Make high quality
           furniture affordable and available for the mass market. <br />
           <br /> Handmade, and lovingly crafted furniture and homeware is what

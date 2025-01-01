@@ -4,9 +4,9 @@ import React from "react";
 
 function Products() {
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col m-4">
       <h1 className="font-clash text-2xl font-semibold mb-8"> Our Popular Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-[24px]">
         <div  className="md:w-full w-[390px]">
           <Image
             src={"/images/sofa.png"}
@@ -60,3 +60,4 @@ function Products() {
 }
 
 export default Products;
+

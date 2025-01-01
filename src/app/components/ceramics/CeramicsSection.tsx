@@ -11,7 +11,7 @@ const CeramicsSection = () => {
           <h1 className="text-2xl font-semibold font-clash">New Ceramics</h1>
 
           {/* Product Items */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
             {/* Product 1 */}
             <div className="w-full h-auto">
               <Image

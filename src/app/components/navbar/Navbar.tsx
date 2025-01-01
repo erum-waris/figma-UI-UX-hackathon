@@ -4,7 +4,7 @@ import DownNavbar from './DownNavbar'
 
 function Navbar() {
   return (
-   <nav>
+       <nav>
     <UpNavbar/>
     <div className='w-[390px] md:w-[1440px]  border-b-2 border-black opacity-[10%]'></div>
     <DownNavbar />

@@ -14,7 +14,7 @@ function DownNavbar() {
   return (
     <div className="w-full bg-white ">
       {/* Desktop Navbar */}
-      <div className="hidden sm:p-3 md:flex md:justify-center md:items-center px-6 py-4">
+      <div className="mx-auto hidden lg:flex lg:justify-center lg:items-center md:grid md:grid-cols-5 px-6 py-4">
         {/* Centered Links */}
         
         <ul className="flex gap-8 text-[#726E8D]  text-[1.2rem] font-400">
@@ -65,7 +65,7 @@ function DownNavbar() {
             <CiSearch />
           </span>
           <div
-            className="flex flex-col justify-between w-8 h-[20px] cursor-pointer"
+            className="flex flex-col justify-between w-8 h-[20px]  cursor-pointer"
             onClick={toggleMenu}
           >
             {isMenuOpen ? (
@@ -133,3 +133,9 @@ function DownNavbar() {
 }
 
 export default DownNavbar;
+
+
+
+
+
+
