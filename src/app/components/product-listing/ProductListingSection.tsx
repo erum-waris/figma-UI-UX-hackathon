@@ -18,7 +18,7 @@ function ProductListingSection() {
         />
       </div>
 
-      <div className="hidden md:w-[1440px] md:h-[64px] md:flex md:justify-between mb-[28px]">
+      <div className="hidden md:flex md:flex-col lg:justify-between  mb-[28px]">
         {/*  left side Dropdown menu */}
         <div className="hidden md:flex md:justify-between space-x-4 p-4">
           <Dropdown label="Category" options={["Sofas","Chairs","Vase"]} />
@@ -36,7 +36,7 @@ function ProductListingSection() {
         </div>
 
         {/* right side Dropdown menu */}
-        <div className="hidden md:flex md:justify-between space-x-4 p-4 md:mr-5 overflow-x-hidden">
+        <div className="hidden md:flex md:justify-between space-x-4 p-4 md:mr-5 overflow-x-hidden z-1 md:mb-[3rem]">
 
           <span className="px-4 py-2 rounded-md font-satoshi text-[16px] font-400 text-[#2A254B] hover:pb-[2px] hover:bg-gray-50">
             Sorting by:
@@ -130,7 +130,7 @@ function ProductListingSection() {
                </div>
                {/* row 2 */}
 
- <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 md:mt-[3rem]">
+ <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 md:mt-[3rem] md:m-3">
             {/* Product 1 */}         
             <div className="w-full h-auto">
               <Image
@@ -196,7 +196,7 @@ function ProductListingSection() {
 
 {/* row 3 */}
 
- <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20 md:m-3">
+ <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 md:mt-[3rem] md:m-3">
             {/* Product 1 */}
             <div className="w-full h-auto">
               <Image

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 
+
 function Products() {
   return (
     <div className=" flex flex-col m-4">
@@ -20,6 +21,7 @@ function Products() {
                 <p className='font-satoshi'>&pound;980</p>
             </div>
         </div>
+        
         <div className="flex  gap-[24px]">
         <div className="w-full h-auto">
               <Image
@@ -48,6 +50,7 @@ function Products() {
               </div>
             </div>
         </div>
+      
       </div>
 
       <div className="my-10 flex justify-center items-center">

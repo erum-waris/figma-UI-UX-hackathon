@@ -4,6 +4,7 @@ import { ProductCardProps } from "../../../types/Types";
 
 
 const ProductCard: React.FC<ProductCardProps> = ({
+ 
   imageSrc,
   height,
   width,
@@ -12,6 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   return (
     <div className="w-full h-auto">
+      
       <Image
         src={imageSrc}
         height={height}
