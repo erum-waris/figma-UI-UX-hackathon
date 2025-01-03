@@ -10,12 +10,14 @@ export interface CardProps {
     heading:string;
     description: string;
 }
-export interface  ProductsCardProps {
-    id?: string;
-    image:string;
-    title:string;
-    price:string
-}
+export interface ProductCardProps {
+    id:string;  //product id 
+    imageSrc: string; // Product image source
+    height: number; // Height of the image
+    width: number; // Width of the image
+    title: string; // Product title
+    price: number; // Product price in pounds
+  }
 
 export interface DropdownProps {
     label: string;

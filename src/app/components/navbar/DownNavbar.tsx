@@ -13,11 +13,11 @@ function DownNavbar() {
 
   return (
     <div className="w-full bg-white ">
-      {/* Desktop Navbar */}
-      <div className="mx-auto hidden lg:flex lg:justify-center lg:items-center md:grid md:grid-cols-5 px-6 py-4">
+      {/* Desktop Navbar */} 
+      <div className="mx-auto hidden md:flex md:justify-center md:items-center">
         {/* Centered Links */}
         
-        <ul className="flex gap-8 text-[#726E8D]  text-[1.2rem] font-400">
+        <ul className="md:grid md:grid-cols-5 lg:flex gap-8 text-[#726E8D]  text-[1.2rem] font-400">
         
         <li>
             <NavbarLinks href="/" title="Home" />
@@ -26,7 +26,7 @@ function DownNavbar() {
             <NavbarLinks href="/about" title="About" />
           </li>
           <li>
-            <NavbarLinks href="/productlisting" title="ProductsListing" />
+            <NavbarLinks href="/productlisting" title="Products" />
           </li>
         
           <li>

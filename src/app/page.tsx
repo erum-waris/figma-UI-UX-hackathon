@@ -9,7 +9,7 @@ import FeaturesSection from './components/Feature'
 
 function Home() {
   return (
-    <main className='relative mx-auto w-[390px]  bg-white md:w-[1440px] overflow-hidden'>
+    <main className=''>
       <HeroSection/> 
       <BrandSection/>
       <CeramicsSection/>

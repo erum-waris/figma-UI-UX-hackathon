@@ -4,7 +4,7 @@ import React from 'react'
 function AboutGetInTouchSection() {
     return (
         <section className="flex justify-center items-center">
-        <div className="md:max-w-[1440px] w-full h-auto md:mt-12 mt-14 flex md:flex-row flex-col">
+        <div className=" w-full h-auto md:mt-12 mt-14 flex md:flex-row flex-col">
 
  {/* leftt Section */}
  <div className="md:w-1/2 h-auto">

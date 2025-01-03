@@ -32,7 +32,7 @@ function AboutBrandSection() {
     <section>
        
       <h1 className='md:text-center ml-9 text-[24px] font-400 font-clash relative top-[48px] md:top-[30px] mb-[20px]'>What makes our brand different</h1>
-       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 relative top-[100px]  md:top-[45px] gap-[30px] mb-[200px]">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 relative top-[100px]  md:top-[45px] gap-[30px] mb-[200px]">
     {details.map((detail, index) => (
         <BrandCard2
             key={index} 

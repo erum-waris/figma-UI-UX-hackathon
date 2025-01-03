@@ -4,11 +4,11 @@ import React from 'react'
 
 function AboutFeature() {
   return (
-    <div className='md:max-w-[1440px] md:w:[390px] md:h-[598px] h-[628px] flex md:flex-row justify-center items-center flex-col gap-[24px] mt-[-60px] '>
-        <div className='bg-[#2A254B] md:w-[634px] md:h-[478px] w-[342px] h-[281px] flex flex-col md:justify-start justify-center  '>
-  <div className='md:w-[495px] md:h-[99px] md:ml-[64px] ml-[36px] md:mt-[64px] w-[278px] h-[103px] mt-[16px] ' >
-  <h2 className=" md:text-[32px] text-[20px] text-[#FFFFFF] font-clash">It started with a small idea</h2>
-  <p className=" text-[#FFFFFF] md:text-[18px] text-[14px] font-satoshi">A global brand with local beginnings, our story begain in a small studio in South London in early 2014</p>
+    <div className='relative sm:bottom-[12rem] md:h-[598px] h-[628px] flex lg:flex-row justify-center items-center flex-col gap-[24px] mx-4'>
+        <div className='w-full bg-[#2A254B] sm:h-[340px]  md:h-[478px] h-[281px] flex flex-col md:justify-start justify-center  '>
+  <div className=' md:h-[99px] md:ml-[64px] ml-[36px] md:mt-[64px]  h-[103px] mt-[16px] ' >
+  <h2 className=" md:text-[32px] sm:text-[28px] text-[20px] text-[#FFFFFF] font-clash px-3">It started with a small idea</h2>
+  <p className=" text-[#FFFFFF] md:text-[18px] text-[14px] sm:text-[18px] font-satoshi px-3">A global brand with local beginnings, our story begain in a small studio in South London in early 2014</p>
   </div>
 
 
@@ -22,7 +22,7 @@ function AboutFeature() {
             View Collection
           </Link>
         </div>
-        <div className='md:w-[634px] md:h-[478px] w-[342px] h-[259px] '> 
+        <div className='w-full md:h-[478px] h-[259px] '> 
               <Image
                           src="/images/sofa-img.png"
                           alt="chair"

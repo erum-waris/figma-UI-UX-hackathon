@@ -4,7 +4,7 @@ import React from 'react'
 function SignUp() {
   return (
     <section>
-    <div className='flex justify-center items-center w-[390px] h-[292px] md:w-[1440px] md:h-[481px] leading-[50.4px] md:bg-[#F9F9F9]'>
+    <div className='flex justify-center items-center  h-[292px] md:h-[481px] leading-[50.4px] md:bg-[#F9F9F9]'>
         <div className='bg-white md:w-[1273px] md:h-[364px] flex flex-col pt-[70px] '> 
     <h1 className='md:text-[36px] text-[32px] text-[#2A254B] font-clash text-center '> Join the club and get the benefits</h1>
      

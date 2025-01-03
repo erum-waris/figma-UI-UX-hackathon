@@ -31,7 +31,7 @@ function FeaturesSection() {
     <section>
        
       <h1 className='md:text-center ml-9 text-[24px] font-400 font-clash relative top-[48px] md:top-[120px]'>What makes our brand different</h1>
-       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 relative top-[100px] md:top-[145px]">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 relative top-[100px] md:top-[145px]">
     {details.map((detail, index) => (
         <BrandCard
             key={index} 
