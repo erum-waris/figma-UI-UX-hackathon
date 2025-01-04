@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className=" relative mx-auto h-[502px] md:h-[470px] lg:h-[584px]  justify-center items-center md:my-[3rem] flex flex-col md:flex-row lg:gap-0 md:gap-0 gap-[2rem] md:mx-[1.5rem] lg:mx-[3rem]">
+    <div className=" relative md:top-1 mx-auto h-[502px] md:h-[470px] lg:h-[584px]  justify-center items-center md:my-[3rem] flex flex-col md:flex-row lg:gap-0 md:gap-0 gap-[2rem] md:mx-[1.5rem] lg:mx-[3rem]">
       <div className="bg-[#2A254B] h-[502px] md:h-[470px]  lg:h-[584px]">
         <div className="relative px-10 md:px-4 lg:px-[3.5rem]">
           <h2 className="px-[3.2rem] font-clash font-normal  leading-[44.8px] text-white text-3xl lg:text-4xl pt-[6rem] md:pt-[4rem]">
@@ -23,13 +23,13 @@ const Hero = () => {
           </Link>
         </div>
       </div>
-      <div className="relative h-[502px] lg:h-[584px] md:block hidden">
+      <div className="relative h-[502px] md:h-[470px] lg:h-[584px] md:block hidden">
         <Image
           src="/images/hero-img.png"
           alt="Chair"
           width={200}
           height={200}
-          className="w-full h-[502px] md:w-[640px] md:mt-4 md:h-[470px]  lg:w-[520px] lg:h-[584px]"
+          className="w-full h-[502px] md:w-[640px] md:h-[470px]  lg:w-[520px] lg:h-[584px]"
         />
       </div>
     </div>
