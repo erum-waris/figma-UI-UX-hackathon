@@ -19,6 +19,15 @@ export interface ProductCardProps {
     price: number; // Product price in pounds
   }
 
+  export interface products{
+    product_name:string;
+   price: string;
+   image: string;
+    description?: string;
+    slug?:string
+    quantity?:number
+  }
+
 export interface DropdownProps {
     label: string;
     options: string[];

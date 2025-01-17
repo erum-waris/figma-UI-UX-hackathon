@@ -1,99 +1,118 @@
-// import { useState, useEffect } from "react";
-// import client, { urlFor } from "../sanity";
+'use client';
+import Image from "next/image";
+import React, { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 
-// interface Product {
-//   _id: string;
-//   name: string;
-//   price: number;
-//   image: {
-//     asset: {
-//       _ref: string;
-//     };
-//   };
-// }
+const Shopping = () => {
+   
+  const  {cart,removeFromCart,totalprice } = useCart()
 
-// export default function Home() {
-//   const [products, setProducts] = useState<Product[]>([]);
-//   const [cart, setCart] = useState<Product[]>([]);
+   // State for managing product quantity
+       const [quantity, setQuantity] = useState<number>(0);
+  // Handlers for quantity increment and decrement
+  const handleIncrement = () => setQuantity((quantity) => quantity + 1);
+  const handleDecrement = () => setQuantity((quantity) => ( quantity > 1 ? quantity - 1 : 1));
+  
+  return (
+    <>
+      <section className="py-12 mt-12">
+        <div className="w-[95%] sm:w-[90%] mx-auto border border-gray-300 rounded-lg p-4 sm:p-6 lg:p-10">
+          <div className="flex flex-col lg:flex-row justify-between gap-6">
+            {/* Products Section */}
+            <div className="w-full lg:w-2/3">
+              <h1 className="text-lg sm:text-xl font-semibold mb-6">Products</h1>
 
-//   // Fetch data from Sanity
-//   useEffect(() => {
-//     const fetchProducts = async () => {
-//       const data = await client.fetch(`*[_type == "product"]`);
-//       setProducts(data);
-//     };
-//     fetchProducts();
-//   }, []);
+              <ul className="list-none space-y-4">
+                {cart.map((item) => (
+                  <li
+                    key={item.slug}
+                    className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 p-4 border rounded-md bg-white"
+                  >
+                    <Image
+                      src={item.image}
+                      width={900}
+                      height={900}
+                      alt={item.product_name}
+                      className="rounded-md w-full sm:w-40 sm:h-40 lg:w-60 lg:h-80 object-cover"
+                    />
+                    <div className="flex-grow text-center sm:text-left">
+                      <h1 className="text-base sm:text-lg font-semibold">{item.product_name}</h1>
+                     
+                      <h1 className="text-sm sm:text-base font-bold">
+                        {item.price}
+                      </h1>
 
-//   const addToCart = (product: Product) => {
-//     setCart([...cart, product]);
-//   };
+                      {/* Quantity Controller */}
+          <div className="flex items-center gap-4 mt-2">
+            <button
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              onClick={handleDecrement}
+            >
+              -
+            </button>
+            <span className="text-xl font-semibold">{quantity}</span>
+            <button
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              onClick={handleIncrement}
+            >
+              +
+            </button>
+          </div>
 
-//   const removeFromCart = (id: string) => {
-//     setCart(cart.filter((item) => item._id !== id));
-//   };
+                      <button
+                        className="p-2 bg-red-500 text-white rounded-md mt-4 hover:bg-red-700 transition w-full sm:w-auto"
+                        onClick={()=>removeFromCart(item.slug)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
 
-//   return (
-//     <div className="p-4 max-w-4xl mx-auto">
-//       <h1 className="text-2xl font-bold mb-4">Add to Cart with Images</h1>
+           <div className="mt-4 flex flex-col gap-4">
+          <h2 className="text-lg font-medium text-gray-700">
+              Total Quantity:
+              <span className="text-green-500 font-bold font-clash mx-3">
+              {quantity} 
+              </span>
+            </h2>
+            <h2 className="text-lg font-medium text-gray-700">
+              Total Price:
+              <span className="text-green-500 font-bold font-clash mx-3">
+              ${cart.reduce((total, item) => total + item.price * item.quantity, 0)}
+              </span>
+            </h2>
+          </div>
 
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//         <div>
-//           <h2 className="text-xl font-semibold mb-2">Products</h2>
-//           {products.map((product) => (
-//             <div
-//               key={product._id}
-//               className="flex items-center p-4 border rounded-lg mb-4"
-//             >
-//               <img
-//                 src={urlFor(product.image).url()}
-//                 alt={product.name}
-//                 className="w-20 h-20 object-cover rounded-lg mr-4"
-//               />
-//               <div className="flex-1">
-//                 <p className="font-medium">{product.name}</p>
-//                 <p className="text-sm text-gray-600">${product.price}</p>
-//               </div>
-//               <button
-//                 onClick={() => addToCart(product)}
-//                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-//               >
-//                 Add to Cart
-//               </button>
-//             </div>
-//           ))}
-//         </div>
+              <p className="text-sm text-gray-500 mt-2">
+                Taxes and shipping are calculated at checkout.
+              </p>
+            </div>
 
-//         <div>
-//           <h2 className="text-xl font-semibold mb-2">Cart</h2>
-//           {cart.length > 0 ? (
-//             cart.map((item) => (
-//               <div
-//                 key={item._id}
-//                 className="flex items-center p-4 border rounded-lg mb-4"
-//               >
-//                 <img
-//                   src={urlFor(item.image).url()}
-//                   alt={item.name}
-//                   className="w-16 h-16 object-cover rounded-lg mr-4"
-//                 />
-//                 <div className="flex-1">
-//                   <p className="font-medium">{item.name}</p>
-//                   <p className="text-sm text-gray-600">${item.price}</p>
-//                 </div>
-//                 <button
-//                   onClick={() => removeFromCart(item._id)}
-//                   className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-//                 >
-//                   Remove
-//                 </button>
-//               </div>
-//             ))
-//           ) : (
-//             <p className="text-gray-600">Your cart is empty.</p>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+            {/* Order Summary */}
+            <div className="w-full lg:w-1/3 bg-gray-50 rounded-lg p-4 sm:p-6">
+              <h1 className="text-lg sm:text-xl font-semibold mb-6">Order Summary</h1>
+
+              <div className="flex justify-between mb-4">
+                <p className="text-gray-600">Subtotal</p>{totalprice}
+                <p className="font-bold">${}</p>
+              </div>
+
+              <div className="flex justify-between mb-4">
+                <p className="text-gray-600">Total</p>
+                <p className="font-bold">${cart.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
+              </div>
+
+              <button className="w-full bg-gray-800 text-white py-3 rounded-lg">
+                Go to Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Shopping;

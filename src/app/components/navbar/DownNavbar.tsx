@@ -1,15 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import NavbarLinks from "./NavbarLinks";
 import { CiSearch } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
+import Link from "next/link";
+
+
+import { useCart } from "@/app/context/CartContext";
+
 
 function DownNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const {cart}:any = useCart()
+
 
   return (
     <div className="w-full bg-white ">
@@ -94,7 +101,18 @@ function DownNavbar() {
         <ul className="flex flex-col items-center bg-white text-black text-xl py-6 gap-5 md:hidden">
           <span className='flex gap-[24px] text-[2rem] mb-[20px]'>
             
-             <IoCartOutline /> <FaRegUserCircle />  </span>
+          <Link href="/cart">
+          <button className="relative">
+            <IoCartOutline />
+            {cart?.length > 0 && (
+              <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-2">
+                {cart.length}
+              </span>
+            )}
+          </button>
+        </Link> 
+          <Link href="/" ><FaRegUserCircle /></Link> </span>
+           
           <li>
             <NavbarLinks href="/" title="Home" />
           </li>

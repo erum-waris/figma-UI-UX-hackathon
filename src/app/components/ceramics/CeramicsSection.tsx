@@ -6,7 +6,7 @@ const CeramicsSection = () => {
   return (
     <>
       <section>
-        <div className=" px-4 md:px-8 py-12 text-[#2A254B] mt-12 md:mt-[300px]">
+        <div className=" px-4 md:px-8 py-12 text-[#2A254B] mt-20 md:mt-[300px]">
           {/* Title */}
           <h1 className="text-2xl font-semibold font-clash">New Ceramics</h1>
 

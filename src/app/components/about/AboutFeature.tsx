@@ -1,39 +1,40 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 function AboutFeature() {
   return (
-    <div className='relative sm:bottom-[12rem] md:h-[598px] h-[628px] flex lg:flex-row justify-center items-center flex-col gap-[24px] mx-4'>
-        <div className='w-full bg-[#2A254B] sm:h-[340px]  md:h-[478px] h-[281px] flex flex-col md:justify-start justify-center  '>
-  <div className=' md:h-[99px] md:ml-[64px] ml-[36px] md:mt-[64px]  h-[103px] mt-[16px] ' >
-  <h2 className=" md:text-[32px] sm:text-[28px] text-[20px] text-[#FFFFFF] font-clash px-3">It started with a small idea</h2>
-  <p className=" text-[#FFFFFF] md:text-[18px] text-[14px] sm:text-[18px] font-satoshi px-3">A global brand with local beginnings, our story begain in a small studio in South London in early 2014</p>
-  </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center h-auto md:h-[478px] mx-4 mb-4">
+      {/* Left Section */}
+      <div className="bg-[#2A254B] h-[400px] text-white flex flex-col justify-center p-6 md:pl-10 rounded-lg mt-[-80px]">
+        <h2 className="font-clash text-lg md:text-2xl leading-6 md:leading-8 mb-4">
+          It started with a small idea
+        </h2>
+        <p className="font-satoshi text-sm md:text-base leading-5 md:leading-6 mb-6">
+          A global brand with local beginnings, our story began in a small studio in South London in early 2014.
+        </p>
+        <Link
+          href="/productlisting"
+          className="bg-[#F9F9F926] text-white text-center font-medium text-sm md:text-base hover:bg-slate-400 hover:text-black
+          max-w-max py-3 px-6 rounded-lg transition-all duration-300"
+        >
+          View Collection
+        </Link>
+      </div>
 
-
-    <Link
-            href="/productlisting"
-            className="bg-[#F9F9F926] text-[#fff] md:px-4 md:py-4 py-4 text-center  text-[16px] md:text-[18px] font-medium hover:bg-slate-400 hover:text-black md:w-[170px] 
-            w-[278px] h-[56px]
-            md:ml-[64px] ml-[32px] mx-auto
-             md:mt-[180px] mt-[40px] "
-          >
-            View Collection
-          </Link>
-        </div>
-        <div className='w-full md:h-[478px] h-[259px] '> 
-              <Image
-                          src="/images/sofa-img.png"
-                          alt="chair"
-                          layout="responsive" 
-                          width={700}
-                          height={600} 
-                          className="object-cover"
-                        />
-        </div>
+      {/* Right Section */}
+      <div className="relative h-full rounded-lg">
+        <Image
+          src="/images/sofa-img.png"
+          alt="chair"
+   
+          width={700}
+          height={600}
+          className="h-[400px] rounded-lg object-cover"
+        />
+      </div>
     </div>
-  )
+  );
 }
 
-export default AboutFeature
+export default AboutFeature;
