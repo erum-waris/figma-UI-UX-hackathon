@@ -3,14 +3,14 @@ import React from "react";
 
 import { client } from "@/sanity/lib/client";
 import Dropdown from "../components/Dropdown";
-import { products } from "../../../types/Types";
+import { Products } from "../../../types/Types";
 import ProductCard from "../components/ProductCard";
 
 export default async function ProductListingSection() {
   // GROQ query to fetch all products
   const query = `*[_type == "product"]{
   name,
-  slug,
+  "slug":slug.current,
   "category": category->title, // Assuming category has a "title" field
   image,
   price,
@@ -22,7 +22,7 @@ export default async function ProductListingSection() {
 }`;
 
   // Fetch products using the Sanity client
-  const getProducts: products[] = await client.fetch(query);
+  const getProducts: Products[] = await client.fetch(query);
 
   // Ensure the fetched products are logged
   console.log(getProducts);
@@ -84,7 +84,7 @@ export default async function ProductListingSection() {
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mx-5">
-        {getProducts.map((product: products) => (
+        {getProducts.map((product: Products) => (
           <ProductCard product={product} key={product.slug} />
         ))}
       </div>
