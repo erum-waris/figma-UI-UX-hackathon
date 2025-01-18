@@ -26,6 +26,7 @@ export interface ProductCardProps {
     description?: string; // Optional detailed description of the product
     slug?: string; // Optional slug for the product (used for routing)
     quantity?: number; // Optional quantity of the product
+    category?:string;
   }
   
 

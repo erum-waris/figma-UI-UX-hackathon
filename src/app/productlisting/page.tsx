@@ -11,7 +11,7 @@ export default async function ProductListingSection() {
   const query = `*[_type == "product"]{
   name,
   "slug":slug.current,
-  "category": category->title, // Assuming category has a "title" field
+ "category": category->title, // Assuming category has a "title" field
   image,
   price,
   quantity,
@@ -25,7 +25,7 @@ export default async function ProductListingSection() {
   const getProducts: Products[] = await client.fetch(query);
 
   // Ensure the fetched products are logged
-  console.log(getProducts);
+  // console.log(getProducts);
 
   return (
     <section>
@@ -53,13 +53,13 @@ export default async function ProductListingSection() {
         </div>
 
         {/* Right side Dropdown menu */}
-        <div className="hidden md:flex md:justify-between space-x-4 p-4 md:mr-5 overflow-x-hidden z-1 md:mb-[3rem]">
+        <div className="hidden md:flex md:justify-between space-x-4 p-4 md:mr-5 overflow-x-hidden md:mb-[3rem]">
           <span className="px-4 py-2 rounded-md font-satoshi text-[16px] font-400 text-[#2A254B] hover:pb-[2px] hover:bg-gray-50">
             Sorting by:
           </span>
           <Dropdown
             label="Date added"
-            options={["1-3-2025", "2-4-2025", "2-5-2025"]}
+            options={["Newest","Oldest","Popular"]}
           />
         </div>
       </div>

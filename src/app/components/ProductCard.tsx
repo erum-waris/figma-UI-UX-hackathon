@@ -26,8 +26,9 @@ const ProductCard = ({ product }: { product: Products }) => {
         <p className="text-md font-clash text-[#2A254B] truncate">
           {product.name || "Unknown Product"}
         </p>
+        
         <p className="text-md font-satoshi text-gray-700">
-          {product.price ? `${product.price}` : "Price Not Available"}
+        £{product.price ? `${product.price}` : "Price Not Available"}
         </p>
       </div>
 
