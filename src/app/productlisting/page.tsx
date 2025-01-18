@@ -8,12 +8,18 @@ import ProductCard from "../components/ProductCard";
 
 export default async function ProductListingSection() {
   // GROQ query to fetch all products
-  const query = `*[_type=='products'] | order(_createdAt desc) {
-    product_name,
-    price,
-    "image": image.asset->url,
-    "slug":slug.current
-  }`;
+  const query = `*[_type == "product"]{
+  name,
+  slug,
+  "category": category->title, // Assuming category has a "title" field
+  image,
+  price,
+  quantity,
+  tags,
+  description,
+  features,
+ 
+}`;
 
   // Fetch products using the Sanity client
   const getProducts: products[] = await client.fetch(query);

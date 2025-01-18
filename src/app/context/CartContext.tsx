@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState } from "react";
 // Define the structure of a cart item
 interface CartItem {
   slug: string;
-  product_name: string;
+  name: string;
   price: number;
   image: any;
   quantity: number;

@@ -32,11 +32,11 @@ const Shopping = () => {
                       src={item.image}
                       width={900}
                       height={900}
-                      alt={item.product_name}
+                      alt={item.name}
                       className="rounded-md w-full sm:w-40 sm:h-40 lg:w-60 lg:h-80 object-cover"
                     />
                     <div className="flex-grow text-center sm:text-left">
-                      <h1 className="text-base sm:text-lg font-semibold">{item.product_name}</h1>
+                      <h1 className="text-base sm:text-lg font-semibold">{item.name}</h1>
                      
                       <h1 className="text-sm sm:text-base font-bold">
                         {item.price}

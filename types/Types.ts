@@ -19,14 +19,15 @@ export interface ProductCardProps {
     price: number; // Product price in pounds
   }
 
-  export interface products{
-    product_name:string;
-   price: string;
-   image: string;
-    description?: string;
-    slug?:string
-    quantity?:number
+  export interface Products {
+    name: string; // Represents the name of the product
+    price: string; // Price of the product
+    image: string; // URL or path to the product image
+    description?: string; // Optional detailed description of the product
+    slug?: string; // Optional slug for the product (used for routing)
+    quantity?: number; // Optional quantity of the product
   }
+  
 
 export interface DropdownProps {
     label: string;

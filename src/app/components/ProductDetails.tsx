@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
-import { PortableText } from "@portabletext/react"; 
+
 import Link from "next/link";
 
 
@@ -17,7 +17,7 @@ const DetailsPage = ({ product }: { product: any }) => {
   const handleAddToCart = () => {
     addToCart({
       slug: product.slug,
-      product_name: product.product_name,
+      name: product.product_name,
       price: product.price,
       quantity: product.quantity,
       image: product.image
@@ -55,7 +55,7 @@ const DetailsPage = ({ product }: { product: any }) => {
 
           <div className="mt-4">
             <h2 className="text-3xl font-bold font-clash">Description</h2>
-            <p className="mt-2 text-gray-700 font-clash"> <PortableText value={product.description} /></p>
+            <p className="mt-2 text-gray-700 font-clash">{product.description}</p>
           </div>
 <div className="flex gap-5">
 <div className="mt-6">
