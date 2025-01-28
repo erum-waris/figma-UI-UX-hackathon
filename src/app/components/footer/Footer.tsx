@@ -37,7 +37,7 @@ const FooterHeading = ({ name }: { name: string }) => {
 
 const Footer = () => {
   return (
-    <div className="mx-auto relative bottom-4 w-full h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[3rem] md:px-[2rem]">
+    <div className="mx-auto sticky bottom-0 w-full h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[3rem] md:px-[2rem]">
       <div className="flex flex-col md:flex-wrap lg:flex-row md:border-b md:border-[#4e4d93] ">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 md:gap-[4rem]">
           <div>
@@ -75,9 +75,9 @@ const Footer = () => {
             <input
               type="email"
               placeholder="your@email.com"
-              className="bg-white bg-opacity-[15%] placeholder:font-satoshi focus:outline-none py-2 px-3 md:py-4 md:px-5 placeholder:text-white sm:w-[300px] md:w-[400px]"
+              className="bg-white bg-opacity-[15%] hover:border-white hover:border-2 placeholder:font-satoshi focus:outline-none py-2 px-3 md:py-4 md:px-5 placeholder:text-white sm:w-[300px] md:w-[400px]"
             />
-            <button className="sm:px-[32px] py-[16px] bg-white text-[#2A254B] font-satoshi font-normal md:text-xl leading-6 hover:bg-[#7dcae8] hover:text-[#291b1b]">
+            <button className="px-3 sm:px-[32px] py-[16px] bg-white text-[#2A254B] font-satoshi font-normal md:text-xl leading-6 hover:bg-[#7dcae8]  hover:text-[#291b1b]">
               Sign up
             </button>
           </div>

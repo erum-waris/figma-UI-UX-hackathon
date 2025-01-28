@@ -4,7 +4,7 @@ import { CiCircleCheck } from "react-icons/ci";
 import { RiSeedlingLine } from "react-icons/ri";
 import { FaRegCreditCard } from "react-icons/fa6";
 import BrandCard from './BrandCard';
-function FeaturesSection() {
+function BrandSection() {
     const details = [
         {
         icon:<TbTruckDelivery />,
@@ -30,8 +30,8 @@ function FeaturesSection() {
   return (
     <section>
        
-      <h1 className='md:text-center ml-9 text-[24px] font-400 font-clash relative top-[48px] md:top-[120px]'>What makes our brand different</h1>
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 relative top-[100px] md:top-[145px] mx-4" >
+      <h1 className='md:text-center ml-9 text-[24px]  md:text-3xl font-400 font-clash relative top-[48px] md:top-[30px]'>What makes our brand different</h1>
+       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-4 relative top-[100px] md:top-[145px] mx-4 " >
     {details.map((detail, index) => (
         <BrandCard
             key={index} 
@@ -46,4 +46,4 @@ function FeaturesSection() {
   )
 }
 
-export default FeaturesSection
+export default BrandSection

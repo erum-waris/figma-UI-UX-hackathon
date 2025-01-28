@@ -1,23 +1,28 @@
 import { client } from "@/sanity/lib/client";
-import DetailsPage from "@/app/components/ProductDetails";
+import ProductDetails from "@/app/components/ProductDetails";
+import BrandSection from "@/app/components/brand/BrandSection";
+import SignUp from "@/app/components/SignUp";
+import MoreProducts from "@/app/components/Recomend";
+
 
 export default async function Products({
   params: { slug },
 }: {
   params: { slug: string };
 }) {
-  // Query for fetching product details by slug
-  const query = `*[_type == 'products' && slug.current == $slug][0]{
-    product_name,
-    description,
+  // Fetch product data by slug
+  const query = `*[_type == "product" && slug.current == $slug][0]{
+    name,
+    "slug": slug.current,
     "image": image.asset->url,
-    price
+    price,
+    description,
+    features,
+    dimensions
   }`;
-
-  // Fetch the product data from Sanity
   const product = await client.fetch(query, { slug });
 
-  // If no product is found, render a "Product Not Found" message
+  // Handle case when product is not found
   if (!product) {
     return (
       <div className="mx-auto px-4 py-8">
@@ -28,10 +33,15 @@ export default async function Products({
     );
   }
 
-  // Pass the product data to the DetailsPage component
-  return (
-    <>
-      <DetailsPage product={product} />
-    </>
-  );
+  // Pass the product data to the ProductDetails component
+  return <>
+
+<ProductDetails products={product} />
+<MoreProducts/>
+<div className='mb-[200px]'>
+<BrandSection/>
+</div>
+<SignUp />
+  </> 
+
 }

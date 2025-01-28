@@ -7,8 +7,9 @@ interface CartItem {
   slug: string;
   name: string;
   price: number;
-  image: any;
+  image: string;
   quantity: number;
+  features?:string[];
   
 }
 
@@ -53,8 +54,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Remove an item from the cart by its slug
   const removeFromCart = (slug: string) => {
+    if (window.confirm("Are you sure you want to remove this item from cart?")) {
     setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
-  };
+    }
+    };
 
   // Update the quantity of an item in the cart
 

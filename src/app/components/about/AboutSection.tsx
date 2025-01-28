@@ -15,7 +15,7 @@ function AboutSection() {
         customer service
       </h2>
 
-      <button className="w-full md:relative lg:right-0 md:right-16 mt-[2rem] sm:mb-[4rem] lg:mb-[1rem] lg:mt-2 md:w-[250px] h-[56px] px-[32px] bg-[#F9F9F9] leading-6 text-[#2A254B] font-satoshi font-normal hover:bg-[#2A254B] hover:text-white transition-all duration-300 ease-in-out">
+      <button className="w-full md:relative lg:right-0 md:right-16 mt-[2rem] sm:mb-[4rem] lg:mb-[3rem] lg:mt-2 md:w-[250px] h-[56px] px-[32px] bg-[#F9F9F9] leading-6 text-[#2A254B] font-satoshi font-normal hover:bg-[#2A254B] hover:text-white transition-all duration-300 ease-in-out">
         <Link href="/productlisting">View our products</Link>
       </button>
     </div>
@@ -23,7 +23,9 @@ function AboutSection() {
       
         <AboutFeature/>
         <AboutGetInTouchSection/>
+        <div className='mt-[100px]'>
         <AboutBrandSection/>
+        </div>
         
       <div className='mb-[80px] md:mb-0'>
       <SignUp/>

@@ -11,7 +11,7 @@ function SignUp() {
      <p className='text-[18px]  text-[#2A254B] text-center leading-[24px] font-satoshi p-4'> Sign up for our newsletter and receive exclusive offers on new <br /> ranges, sales, pop up stores and more</p> 
      <div className='md:w-[472px] flex items-center md:relative md:top-[5rem] mx-auto'>
 <input type="email" placeholder="your@email.com" className='md:w-[354px] md:h-[56px] hover:border-2 hover:border-black bg-[#F9F9F9] text-center'/>
-<Link href="/" className='md:w-[118px] md:h-[56px] bg-[#2A254B] text-white text-[16px] placeholder:font-satoshi text-center px-3 md:px-2 hover:bg-white hover:text-blue-950 hover:border-2 hover:border-black'>Sign Up</Link> 
+<button className='md:w-[118px] md:h-[56px] bg-[#2A254B] text-white text-[16px] placeholder:font-satoshi text-center px-3 md:px-2 hover:bg-white hover:text-blue-950 hover:border-2 hover:border-black' ><Link href="/" >Sign Up</Link> </button>
 </div>
  </div>
 

@@ -10,7 +10,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options }) => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex justify-between items-center w-full px-4 py-2 font-satoshi text-[16px] font-400 text-[#2A254B] hover:bg-gray-50 bg-white  focus:outline-none"
+        className="inline-flex justify-between items-center w-full px-4 py-2 font-satoshi text-[1.3rem] font-400 text-[#2A254B] hover:bg-gray-50 bg-white  focus:outline-none"
       >
         {label}
         <svg

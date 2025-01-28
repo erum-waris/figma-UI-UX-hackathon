@@ -3,7 +3,7 @@ import { CardProps } from '../../../../types/Types'
 
 function BrandCard(props:CardProps) {
   return (
-    <div className='flex flex-col h-[124px] p-5 m-auto mb-7 gap-[16px]'>
+    <div className='flex flex-col h-[204px] p-5 m-auto mb-7 gap-[16px] shadow-md hover:bg-gray-100'>
 
      <span className='flex justify-start text-[20px] md:text-[24px]'>{props.icon}</span>
       <h2 className='md:text-[20px] text-[16px] font-clash font-400 '>{props.heading}</h2>

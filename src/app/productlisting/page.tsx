@@ -3,15 +3,16 @@ import React from "react";
 
 import { client } from "@/sanity/lib/client";
 import Dropdown from "../components/Dropdown";
-import { Products } from "../../../types/Types";
+import { Product } from "../../../types/Types";
 import ProductCard from "../components/ProductCard";
+
 
 export default async function ProductListingSection() {
   // GROQ query to fetch all products
   const query = `*[_type == "product"]{
   name,
   "slug":slug.current,
- "category": category->title, // Assuming category has a "title" field
+ "category": category->name, // Assuming category has a "name" field
   image,
   price,
   quantity,
@@ -22,10 +23,10 @@ export default async function ProductListingSection() {
 }`;
 
   // Fetch products using the Sanity client
-  const getProducts: Products[] = await client.fetch(query);
+  const getProducts: Product[] = await client.fetch(query);
 
   // Ensure the fetched products are logged
-  // console.log(getProducts);
+    //console.log(getProducts);
 
   return (
     <section>
@@ -36,6 +37,7 @@ export default async function ProductListingSection() {
           alt="product BG"
           height={209}
           width={1440}
+          priority
           className="md:w-full xl:w-[1440px]"
         />
       </div>
@@ -54,7 +56,7 @@ export default async function ProductListingSection() {
 
         {/* Right side Dropdown menu */}
         <div className="hidden md:flex md:justify-between space-x-4 p-4 md:mr-5 overflow-x-hidden md:mb-[3rem]">
-          <span className="px-4 py-2 rounded-md font-satoshi text-[16px] font-400 text-[#2A254B] hover:pb-[2px] hover:bg-gray-50">
+          <span className="px-4 py-2 rounded-md font-satoshi text-[1.3rem] font-400 text-[#2A254B] hover:pb-[2px] hover:bg-gray-50">
             Sorting by:
           </span>
           <Dropdown
@@ -71,6 +73,7 @@ export default async function ProductListingSection() {
           alt="product BG"
           height={146}
           width={390}
+          priority
           className="w-full"
         />
       </div>
@@ -84,8 +87,8 @@ export default async function ProductListingSection() {
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mx-5">
-        {getProducts.map((product: Products) => (
-          <ProductCard product={product} key={product.slug} />
+        {getProducts.map((product: Product) => (
+          <ProductCard product={product} key={product._id} />
         ))}
       </div>
 
@@ -98,3 +101,4 @@ export default async function ProductListingSection() {
     </section>
   );
 }
+
