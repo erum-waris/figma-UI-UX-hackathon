@@ -5,22 +5,9 @@ import { useCart } from "../context/CartContext";
 import Link from "next/link";
 import Image from "next/image";
 import { Loader } from "lucide-react";
+import { ProductDetailsProps } from "../../../types/Types";
 
-type ProductDetailsProps = {
-  products: {
-    slug: string;
-    name: string;
-    price: number;
-    description: string;
-    features: string[];
-    dimensions: {
-      height: number;
-      width: number;
-      depth: number;
-    };
-    image: string;
-  };
-};
+
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ products }) => {
   const [quantity, setQuantity] = useState(1); // Default quantity set to 1
@@ -54,15 +41,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ products }) => {
       {/* Left Section: Image */}
       <div className="lg:w-1/2 lg:h-[600px] w-full h-[400px] relative shadow-md"> {/* Added relative */}
       {products.image ? (
-  <Image
-    src={products.image}
-    alt={products.name || "Product image"}
-    quality={75}
-    fill
-    loading="lazy"
-    sizes="(max-width: 1024px) 100vw,100vh"
-    style={{ objectFit: "cover" }}
-  />
+    <Image
+          src={products.image}
+          height={400}
+          width={400}
+          alt={products.name || "Product Image"}
+          quality={75}
+          priority
+          className="w-full h-full object-fit rounded-t-md"
+        />
  )
   : (
    <div className="flex flex-col items-center justify-center">

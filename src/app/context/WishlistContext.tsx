@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface WishlistItem {
-  _id: string;
+ 
   name: string;
   image: string;
   price: number;

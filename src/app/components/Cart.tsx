@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { AiOutlineDelete } from "react-icons/ai";
 import Link from "next/link";
 
+
+
 const Shopping = () => {
   const { cart, removeFromCart } = useCart();
   const router = useRouter();
@@ -19,19 +21,53 @@ const Shopping = () => {
     router.push("/productlisting"); // Navigate to the product listing page
   };
 
-  const handleCheckout = () => {
-    const isConfirmed = confirm("Do you want to proceed to checkout?");
-    if (cart.length === 0) {
-      alert("Cart is empty. Please add items to proceed.");
+
+
+// const handleCheckout = async () => {
+//   if (cart.length === 0) {
+//     alert("Cart is empty. Please add items to proceed.");
+//     return;
+//   }
+
+//   const isConfirmed = confirm("Do you want to proceed to checkout?");
+//   if (!isConfirmed) {
+//     alert("Checkout canceled.");
+//    } else {
+//     alert("Checkout successful!");  
+//   }
+// }
+
+// Handle Stripe Checkout
+const handleCheckout = async () => {
+  try {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cart }), // Send the cart items to the backend
+    });
+
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    // If URL is not returned, display an alert
+    if (!data.url) {
+      alert("Failed to create a checkout session. Please try again.");
       return;
     }
-    if (isConfirmed && cart.length > 0) {
-      alert("Checkout successful!");
-      router.push("/checkout");
-    } else {
-      alert("Checkout canceled.");
-    }
-  };
+
+    // Redirect to the checkout URL
+    window.location.href = data.url;
+  } catch (error) {
+    console.error("Checkout failed:", error);
+    alert("Checkout failed. Please try again.");
+  }
+};
+
+     
 
   return (
     <>
@@ -71,7 +107,7 @@ const Shopping = () => {
                         alt={item.name}
                         quality={75}
                         priority
-                        className="rounded-md w-full h-[400px] md:ml-10 lg:ml-[200px] lg:w-[400px] lg:h-80 object-fit"
+                        className="rounded-md w-full h-[400px] md:ml-10 lg:ml-[50px] lg:w-[400px] lg:h-80 object-fit"
                       />
                       <div className="flex-grow text-center mt-5">
                         <h1 className="sm:text-2xl text-lg font-clash font-semibold">
@@ -110,7 +146,7 @@ const Shopping = () => {
 
             {/* Order Summary */}
           
-            <div className="w-full mt-4 md:w-1/3 p-4 bg-gray-200 rounded-lg shadow-md mx-auto md:mx-4 sm:p-6 h-auto overflow-y-auto">
+            <div className="w-full mt-4 lg:mt-6 lg:w-1/3 p-4 bg-gray-200 rounded-lg shadow-md mx-auto md:mx-4 sm:p-6 h-auto overflow-y-auto">
   <h4 className="font-clash text-blue-950 text-xl mb-4">Order Summary</h4>
   <div className="space-y-4">
     {/* List products and their prices */}
@@ -157,7 +193,3 @@ const Shopping = () => {
 };
 
 export default Shopping;
-
-
-  
-

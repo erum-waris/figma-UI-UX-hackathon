@@ -48,7 +48,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
       {/* Add to Cart Button */}
       <div className="w-full flex justify-between mt-4 mr-3">
-        <button  className="w-auto font-clash block text-center mb-2 bg-blue-500 hover:bg-white hover:text-blue-950 hover:border-2 hover:border-black text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-300 ml-4">
+        <button  className="w-auto font-clash block text-center mb-2 bg-blue-500 hover:bg-white hover:text-blue-950 hover:border-2 hover:border-black text-white font-bold py-2 px-4 sm:px-6 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-300 ml-4">
         <Link href={`/productlisting/${product.slug}`}>
           View Details
         </Link>

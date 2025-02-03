@@ -38,7 +38,7 @@ const FooterHeading = ({ name }: { name: string }) => {
 const Footer = () => {
   return (
     <div className="mx-auto sticky bottom-0 w-full h-[800px] bg-[#2A254B] gap-8 md:pt-[3rem] md:pb-[3rem] md:px-[2rem]">
-      <div className="flex flex-col md:flex-wrap lg:flex-row md:border-b md:border-[#4e4d93] ">
+      <div className="flex flex-col md:flex-wrap lg:flex-row border-b border-[#4e4d93] ">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 md:gap-[4rem]">
           <div>
             <FooterHeading name="Categories" />
@@ -68,10 +68,10 @@ const Footer = () => {
         </div>
 
         <div className=" md:flex md:flex-col md:relative md:left-[4rem] md:top-[1rem] lg:top-[3rem] m-4">
-          <span className=" md:ml-0 lg:mb-[2rem]">
+          <span className=" md:ml-0 md:mb-[1rem] lg:mb-[2rem]">
             <FooterHeading name="Join our mailing list" />
           </span>
-          <div className="mt-4 flex justify-start ">
+          <div className="mt-4 md:mb-10 flex justify-start ">
             <input
               type="email"
               placeholder="your@email.com"
@@ -87,7 +87,7 @@ const Footer = () => {
   <p className="text-center font-satoshi font-normal leading-[18.9px] text-white md:text-lg md:mt-8">
     Copyright 2022 Avion LTD
   </p>
-  <div className="hidden md:flex mt-10 md:ml-4 gap-3 justify-center lg:justify-between items-center">
+  <div className="flex mt-10 md:ml-4 gap-3 justify-center md:justify-between items-center">
     <Link href="/"><FaLinkedin className="w-[24px] h-[24px] text-white" /></Link>
     <Link href="/"><FaFacebookSquare className="w-[24px] h-[24px] text-white" /></Link>
     <Link href="/"><FaInstagram className="w-[24px] h-[24px] text-white" /></Link>

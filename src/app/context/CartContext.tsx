@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 // Define the structure of a cart item
-interface CartItem {
+export interface CartItem {
   slug: string;
   name: string;
   price: number;

@@ -43,7 +43,7 @@ export default function WishlistPage() {
                       alt={item.name || "Product Image"}
                       quality={75}
                       priority
-                      className="rounded-md w-full h-[400px] md:ml-10 lg:ml-[200px] lg:w-[400px] lg:h-80 object-cover"
+                      className="rounded-md w-full h-[400px] md:ml-6 lg:ml-[50px] lg:w-[400px] lg:h-80 object-cover"
                     />
                   ) : (
                     <div className="w-full h-[200px] md:h-[400px] bg-gray-200 flex items-center justify-center">
@@ -61,13 +61,13 @@ export default function WishlistPage() {
                     <h1 className="sm:text-2xl text-xl font-bold font-satoshi">
                       Description
                     </h1>
-                    <p className="sm:text-xl text-lg font-clash font-semibold">
+                    <p className="sm:text-lg text-md font-clash font-semibold">
                       {item.description}
                     </p>
 
                     {/* Remove Button */}
                     <button
-                      className="px-6 py-2 text-center bg-blue-950 text-white rounded-md mt-4 hover:bg-[#F9F9F9] hover:text-black hover:border-black transition w-full sm:w-auto flex items-center justify-center gap-2"
+                      className="mx-auto px-6 py-2 text-center bg-blue-950 text-white rounded-md mt-4 hover:bg-[#F9F9F9] hover:text-black hover:border-black transition w-full sm:w-auto flex items-center justify-center gap-2"
                       onClick={() => removeFromWishlist(item.slug)}
                     >
                       <AiOutlineDelete size={30} />

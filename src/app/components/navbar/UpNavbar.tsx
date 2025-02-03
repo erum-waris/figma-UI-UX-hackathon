@@ -78,7 +78,7 @@ function UpNavbar() {
             <button className="relative">
               <FaRegHeart />
               {wishlist?.length > 0 && (
-                <span className="absolute -top-2 -right-2 text-lg bg-red-500 text-white rounded-full px-2">
+                <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-2">
                   {wishlist.length}
                 </span>
               )}
@@ -88,7 +88,7 @@ function UpNavbar() {
             <button className="relative">
               <PiShoppingCartBold />
               {cart?.length > 0 && (
-                <span className="absolute -top-2 -right-2 text-lg bg-red-500 text-white rounded-full px-2">
+                <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-2">
                   {cart.length}
                 </span>
               )}
