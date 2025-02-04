@@ -142,7 +142,7 @@ const Shopping = () => {
                 Sign Up to Checkout
               </button>
             ) : ( */}
-              <Link href="/checkout" className="mt-4 px-6 py-2 bg-[#2A254B] text-white rounded-md">
+              <Link href="/checkout" className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
                 Go to Checkout
               </Link>
             {/* )} */}

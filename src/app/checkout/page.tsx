@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const CheckoutForm: React.FC = () => {
   interface OrderItem {
-    title: string;
+    name: string;
     price: number;
     quantity: number;
   }
@@ -218,7 +218,7 @@ const CheckoutForm: React.FC = () => {
           <ul className="space-y-4">
             {formData.orderItems.map((item, index) => (
               <li key={index} className="flex justify-between">
-                <span>{item.title} (x{item.quantity})</span>
+                <span>{item.name} (x{item.quantity})</span>
                 <span>${item.price * item.quantity}</span>
               </li>
             ))}
