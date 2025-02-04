@@ -18,7 +18,9 @@ const Shopping = () => {
   const handleNavigation = () => {
     router.push("/productlisting"); // Navigate to the product listing page
   };
-
+  const handleCheckout = () => {
+    router.push("/checkout"); // Navigate to the product listing page
+  };
 
 
      
@@ -127,12 +129,12 @@ const Shopping = () => {
   </div>
 
   <div className="flex justify-between lg:items-center mt-6 lg:flex-row flex-col lg:gap-0 gap-4">
-    {/* <button
+    <button
       onClick={handleCheckout}
       className="px-3 py-3 bg-blue-950 mr-3 text-white rounded-md hover:bg-gray-200  hover:text-blue-950 hover:border-black hover:border-2"
     >
       Go to checkout
-    </button> */}
+    </button>
      {/* If user is not signed in, show the sign-up button */}
      {/* {!user ? (
               <button
@@ -141,11 +143,11 @@ const Shopping = () => {
               >
                 Sign Up to Checkout
               </button>
-            ) : ( */}
+            ) : (
               <Link href="/checkout" className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
                 Go to Checkout
               </Link>
-            {/* )} */}
+            )} */}
     <button className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
       <Link href="/productlisting">Continue Shopping</Link>
     </button>
