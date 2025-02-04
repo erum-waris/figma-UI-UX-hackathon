@@ -1,61 +1,44 @@
-import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
-
-interface Product {
-  name: string;
-  price: number;
-  image?: {
-    asset?: {
-      url: string;
-    };
-  };
-}
-
-interface CartItem {
-  product: Product;
-  quantity?: number;
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
+import { client } from "@/sanity/lib/client";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  try {
-    const { amount, cart } = await req.json();
-    console.log("Received Data:", { amount, cart });
-    if (amount) {
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount * 100,
-        currency: "usd",
-        automatic_payment_methods: { enabled: true },
+  if (req.method === "POST") {
+    try {
+      const body = await req.json();
+      const {
+        name,
+        email,
+        address,
+        city,
+        postalCode,
+        country,
+        phone,
+        orderItems,
+        totalAmount,
+      } = body;
+
+      // Create a new order document
+      const order = await client.create({
+        _type: "order",
+        Name: name,
+        email,
+        address,
+        city,
+        postalCode,
+        country,
+        phone,
+        orderItems,
+        totalAmount,
+        status: "pending", // default status
       });
-      return NextResponse.json({ client_secret: paymentIntent.client_secret });
+     
+
+      return Response.json({ success: true, order }, { status: 200 });
+    } catch (error) {
+      console.error(error);
+      return Response.json({ success: false, error: "Failed to save order" }, { status: 500 });
     }
-
-    if (cart?.length) {
-      const lineItems = cart.map((item:CartItem) => ({
-        price_data: {
-          currency: "gbp",
-          product_data: { name: item.product.name, images: [item.product.image?.asset?.url || ""] },
-          unit_amount: Math.round(item.product.price * 100),
-        },
-        quantity: item.quantity || 1,
-      }));
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: lineItems,
-        mode: "payment",
-        success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cancel`,
-      });
-
-      return NextResponse.json({ url: session.url });
-    }
-
-    return NextResponse.json({ error: "Invalid request payload" }, { status: 400 });
-  } catch (error) {
-    console.error("Stripe API Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } else {
+    return Response.json({ success: false, error: "Method not allowed" }, { status: 405 });
   }
 }

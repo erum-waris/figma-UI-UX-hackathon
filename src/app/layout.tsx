@@ -6,6 +6,8 @@ import Footer from "./components/footer/Footer";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import ClientLoader from "./components/ClientLoader"; // Import the ClientLoader
+// import { ClerkProvider } from "@clerk/nextjs";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,10 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+       
         <CartProvider>
           <WishlistProvider>
             <ClientLoader>
@@ -44,7 +48,9 @@ export default function RootLayout({
             </ClientLoader>
           </WishlistProvider>
         </CartProvider>
+      
       </body>
     </html>
+    // </ClerkProvider> 
   );
 }

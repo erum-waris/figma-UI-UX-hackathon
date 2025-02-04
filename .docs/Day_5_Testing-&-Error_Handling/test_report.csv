@@ -1,0 +1,6 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Assigned To,Remarks
+TC001,Validate product listing page,"""Open product page > Verify products""","""Products displayed correctly""","""Products displayed correctly""","""Passed""","""Medium""", Not Assigned,No issues found
+TC002,Test API error handling,"""Disconnect API > Refresh page""","""Show fallback UI with error message""","""Error message shown""","""Passed""","""Medium""", Not Assigned,Handled gracefully
+TC003,Check cart functionality,"""Add product to cart > Verify cart contents""","""Cart updates with added product""","""Cart updates as expected""","""Passed""","""High""", Not Assigned,"""Works as expected"""
+TC004,Ensure responsiveness on mobile,"""Resize browser window > Check layout""","""Layout adjusts properly to screen size""","""Responsive layout working as intended""","""Passed""","""Medium""", Not Assigned,"""Working smoothly"""
+TC005,Test dynamic routing functionality,"""Navigate to dynamic product page via URL""","""Correct product details displayed based on URL""","""Product details displayed correctly based on URL structure""","""Passed""","""High""", Not Assigned,"""Dynamic routing works as expected"""

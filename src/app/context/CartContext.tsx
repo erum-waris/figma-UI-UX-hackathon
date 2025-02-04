@@ -20,6 +20,7 @@ interface CartContextType {
   totalQuantity: number;
   addToCart: (item: CartItem) => void;
   removeFromCart: (slug: string) => void;
+  grandTotal:number;
   showCart: boolean;
   setShowCart: (show: boolean) => void;
 }
@@ -58,6 +59,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
     }
     };
+    const grandTotal = cart.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
 
   // Update the quantity of an item in the cart
 
@@ -70,6 +75,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         totalQuantity,
         addToCart,
         removeFromCart,
+        grandTotal,
         showCart,
         setShowCart,
       }}

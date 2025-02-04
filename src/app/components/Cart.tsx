@@ -4,68 +4,22 @@ import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import { AiOutlineDelete } from "react-icons/ai";
 import Link from "next/link";
-
+// import { useUser, useClerk } from "@clerk/nextjs";
 
 
 const Shopping = () => {
-  const { cart, removeFromCart } = useCart();
+  const { grandTotal, cart, removeFromCart } = useCart();
   const router = useRouter();
 
-  // Calculate grand total
-  const grandTotal = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  // const { user } = useUser();
+  // const { openSignUp } = useClerk();
+  
 
   const handleNavigation = () => {
     router.push("/productlisting"); // Navigate to the product listing page
   };
 
 
-
-// const handleCheckout = async () => {
-//   if (cart.length === 0) {
-//     alert("Cart is empty. Please add items to proceed.");
-//     return;
-//   }
-
-//   const isConfirmed = confirm("Do you want to proceed to checkout?");
-//   if (!isConfirmed) {
-//     alert("Checkout canceled.");
-//    } else {
-//     alert("Checkout successful!");  
-//   }
-// }
-
-// Handle Stripe Checkout
-const handleCheckout = async () => {
-  try {
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart }), // Send the cart items to the backend
-    });
-
-    // Check if the response is successful
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    // If URL is not returned, display an alert
-    if (!data.url) {
-      alert("Failed to create a checkout session. Please try again.");
-      return;
-    }
-
-    // Redirect to the checkout URL
-    window.location.href = data.url;
-  } catch (error) {
-    console.error("Checkout failed:", error);
-    alert("Checkout failed. Please try again.");
-  }
-};
 
      
 
@@ -173,12 +127,25 @@ const handleCheckout = async () => {
   </div>
 
   <div className="flex justify-between lg:items-center mt-6 lg:flex-row flex-col lg:gap-0 gap-4">
-    <button
+    {/* <button
       onClick={handleCheckout}
       className="px-3 py-3 bg-blue-950 mr-3 text-white rounded-md hover:bg-gray-200  hover:text-blue-950 hover:border-black hover:border-2"
     >
       Go to checkout
-    </button>
+    </button> */}
+     {/* If user is not signed in, show the sign-up button */}
+     {/* {!user ? (
+              <button
+                onClick={() => openSignUp({})} // Opens sign-up modal
+                className="px-6 py-2 mt-4 bg-[#2A254B] text-white rounded-md"
+              >
+                Sign Up to Checkout
+              </button>
+            ) : ( */}
+              <Link href="/checkout" className="mt-4 px-6 py-2 bg-[#2A254B] text-white rounded-md">
+                Go to Checkout
+              </Link>
+            {/* )} */}
     <button className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
       <Link href="/productlisting">Continue Shopping</Link>
     </button>
