@@ -4,26 +4,35 @@ import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import { AiOutlineDelete } from "react-icons/ai";
 import Link from "next/link";
-// import { useUser, useClerk } from "@clerk/nextjs";
-
+import { useUser, useClerk } from "@clerk/nextjs";
+import { useEffect } from "react";
 
 const Shopping = () => {
-  const { grandTotal, cart, removeFromCart } = useCart();
+  const { grandTotal, cart, removeFromCart, setCart } = useCart();
   const router = useRouter();
+  const { user } = useUser();
+  const { openSignUp } = useClerk();
 
-  // const { user } = useUser();
-  // const { openSignUp } = useClerk();
-  
+  // Load cart data from local storage when component mounts
+  useEffect(() => {
+    const storedCart = localStorage.getItem("shoppingCart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, [setCart]);
+
+  // Update local storage whenever cart changes
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleNavigation = () => {
-    router.push("/productlisting"); // Navigate to the product listing page
+    router.push("/productlisting");
   };
+
   const handleCheckout = () => {
-    router.push("/checkout"); // Navigate to the product listing page
+    router.push("/checkout");
   };
-
-
-     
 
   return (
     <>
@@ -37,9 +46,8 @@ const Shopping = () => {
               </h1>
               {cart.length === 0 ? (
                 <div>
-                <h2 className="text-white text-xl md:text-2xl bg-blue-950 h-20 font-clash flex justify-center items-center felx-col hover:bg-white hover:border-black hover:border-2 hover:text-black w-full rounded-full">
-                  Your Cart Is Empty {" "}
-                  <span className="text-red-500">🛒</span>
+                  <h2 className="text-white text-xl md:text-2xl bg-blue-950 h-20 font-clash flex justify-center items-center felx-col hover:bg-white hover:border-black hover:border-2 hover:text-black w-full rounded-full">
+                    Your Cart Is Empty <span className="text-red-500">🛒</span>
                   </h2>
                   <button
                     onClick={handleNavigation}
@@ -47,7 +55,7 @@ const Shopping = () => {
                   >
                     Select Products
                   </button>
-                  </div>
+                </div>
               ) : (
                 <ul className="list-none space-y-4">
                   {cart.map((item) => (
@@ -91,7 +99,6 @@ const Shopping = () => {
                           onClick={() => removeFromCart(item.slug)}
                         >
                           <AiOutlineDelete size={30} />
-                        
                         </button>
                       </div>
                     </li>
@@ -101,59 +108,56 @@ const Shopping = () => {
             </div>
 
             {/* Order Summary */}
-          
             <div className="w-full mt-4 lg:mt-6 lg:w-1/3 p-4 bg-gray-200 rounded-lg shadow-md mx-auto md:mx-4 sm:p-6 h-auto overflow-y-auto">
-  <h4 className="font-clash text-blue-950 text-xl mb-4">Order Summary</h4>
-  <div className="space-y-4">
-    {/* List products and their prices */}
-    {cart.map((item) => (
-      <div className="flex justify-between" key={item.slug}>
-        <p className="font-satoshi text-lg">
-          {item.quantity} x {item.name}
-        </p>
-        <p className="font-satoshi text-lg">
-          £{(item.price * item.quantity).toFixed(2)}
-        </p>
-      </div>
-    ))}
-  </div>
+              <h4 className="font-clash text-blue-950 text-xl mb-4">
+                Order Summary
+              </h4>
+              <div className="space-y-4">
+                {/* List products and their prices */}
+                {cart.map((item) => (
+                  <div className="flex justify-between" key={item.slug}>
+                    <p className="font-satoshi text-lg">
+                      {item.quantity} x {item.name}
+                    </p>
+                    <p className="font-satoshi text-lg">
+                      £{(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
+                ))}
+              </div>
 
-  {/* Total and other details */}
-  <div className="flex justify-between mt-6">
-    <p className="font-satoshi text-lg">Subtotal</p>
-    <p className="font-satoshi text-lg">£{grandTotal.toFixed(2)}</p>
-  </div>
-  <div className="flex justify-between">
-    <p className="font-satoshi text-lg ">Taxes & Shipping</p>
-    <p className="font-satoshi text-lg text-green-500">(Free)</p>
-  </div>
+              {/* Total and other details */}
+              <div className="flex justify-between mt-6">
+                <p className="font-satoshi text-lg">Subtotal</p>
+                <p className="font-satoshi text-lg">£{grandTotal.toFixed(2)}</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="font-satoshi text-lg">Taxes & Shipping</p>
+                <p className="font-satoshi text-lg text-green-500">(Free)</p>
+              </div>
 
-  <div className="flex justify-between lg:items-center mt-6 lg:flex-row flex-col lg:gap-0 gap-4">
-    <button
-      onClick={handleCheckout}
-      className="px-3 py-3 bg-blue-950 mr-3 text-white rounded-md hover:bg-gray-200  hover:text-blue-950 hover:border-black hover:border-2"
-    >
-      Go to checkout
-    </button>
-     {/* If user is not signed in, show the sign-up button */}
-     {/* {!user ? (
-              <button
-                onClick={() => openSignUp({})} // Opens sign-up modal
-                className="px-6 py-2 mt-4 bg-[#2A254B] text-white rounded-md"
-              >
-                Sign Up to Checkout
-              </button>
-            ) : (
-              <Link href="/checkout" className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
-                Go to Checkout
-              </Link>
-            )} */}
-    <button className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
-      <Link href="/productlisting">Continue Shopping</Link>
-    </button>
-  </div>
-</div>
-
+              <div className="flex justify-between lg:items-center mt-6 lg:flex-row flex-col gap-4">
+                {/* If user is not signed in, show the sign-up button */}
+                {!user ? (
+                  <button
+                    onClick={() => openSignUp({})}
+                    className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2"
+                  >
+                    Sign Up to Checkout
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleCheckout}
+                    className="px-3 py-3 bg-blue-950 mr-3 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2"
+                  >
+                    Go to Checkout
+                  </button>
+                )}
+                <button className="px-3 py-3 bg-blue-950 text-white rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
+                  <Link href="/productlisting">Continue Shopping</Link>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

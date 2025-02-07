@@ -16,7 +16,7 @@ export default function OrderConfirmation() {
       </p>
 
       {/* Button to Continue Shopping */}
-     <Link href="/" className="mt-6 inline-block bg-[#2A254B] text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-[#1f1a3b] transition">
+     <Link href="/productlisting" className="mt-6 inline-block bg-[#2A254B] text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-[#1f1a3b] transition">
         Continue Shopping
         </Link>
     </div>

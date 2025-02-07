@@ -1,92 +1,86 @@
+
 "use client";
+import { createContext, useContext, useState, useEffect } from "react";
 
-import React, { createContext, useContext, useState } from "react";
-
-// Define the structure of a cart item
-export interface CartItem {
+// Define Cart Item Type
+type CartItem = {
   slug: string;
   name: string;
   price: number;
-  image: string;
   quantity: number;
-  features?:string[];
-  
-}
+  image: string;
+};
 
-// Define the structure of the CartContext
-interface CartContextType {
+// Define Context Type
+type CartContextType = {
   cart: CartItem[];
-  totalprice: number;
-  totalQuantity: number;
+  setCart: (cart: CartItem[]) => void; // ✅ Add setCart
   addToCart: (item: CartItem) => void;
   removeFromCart: (slug: string) => void;
-  grandTotal:number;
-  showCart: boolean;
-  setShowCart: (show: boolean) => void;
-}
+  clearCart: () => void;
+  grandTotal: number;
+};
 
-// Create a context with an undefined initial value
+// Create Context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// CartProvider component to wrap the app
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+// Cart Provider
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [showCart, setShowCart] = useState(false);
 
-  const totalprice = cart.reduce((total, item) => total + item.price * item.quantity, 0)
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+  // Load Cart from Local Storage on Mount
+  useEffect(() => {
+    const storedCart = localStorage.getItem("shoppingCart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
 
-  // Add an item to the cart
+  // Update Local Storage when Cart Changes
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Add Item to Cart
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.slug === item.slug);
+      const existingItem = prevCart.find((i) => i.slug === item.slug);
       if (existingItem) {
-        // Update quantity if item already exists in the cart
-        return prevCart.map((cartItem) =>
-          cartItem.slug === item.slug
-            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
-            : cartItem
+        return prevCart.map((i) =>
+          i.slug === item.slug ? { ...i, quantity: i.quantity + 1 } : i
         );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
       }
-      // Add new item to the cart
-      return [...prevCart, item];
     });
   };
 
-  // Remove an item from the cart by its slug
+  // Remove Item from Cart
   const removeFromCart = (slug: string) => {
     if (window.confirm("Are you sure you want to remove this item from cart?")) {
     setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
     }
-    };
-    const grandTotal = cart.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+  };
 
-  // Update the quantity of an item in the cart
+  // Clear Cart
+  const clearCart = () => {
+    setCart([]);
+  };
 
+  // Calculate Grand Total
+  const grandTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{
-        cart,
-        totalprice,
-        totalQuantity,
-        addToCart,
-        removeFromCart,
-        grandTotal,
-        showCart,
-        setShowCart,
-      }}
+      value={{ cart, setCart, addToCart, removeFromCart, clearCart, grandTotal }} // ✅ Now setCart is included
     >
       {children}
     </CartContext.Provider>
   );
 };
 
-// Custom hook to access the CartContext
-export const useCart = (): CartContextType => {
+// Custom Hook to Use Cart Context
+export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error("useCart must be used within a CartProvider");

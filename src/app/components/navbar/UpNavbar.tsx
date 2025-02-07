@@ -94,7 +94,7 @@ function UpNavbar() {
               )}
             </button>
           </Link>
-          <Link href="/">
+          <Link href="/profile">
             <FaRegUserCircle />
           </Link>
         </div>

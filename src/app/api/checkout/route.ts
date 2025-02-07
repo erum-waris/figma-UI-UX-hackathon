@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       // Create a new order document
       const order = await client.create({
         _type: "order",
-        Name: name,
+        name:name,
         email,
         address,
         city,

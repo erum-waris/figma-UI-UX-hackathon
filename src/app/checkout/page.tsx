@@ -66,7 +66,7 @@ const CheckoutForm: React.FC = () => {
     e.preventDefault();
     console.log("Form data being submitted:", formData);
     try {
-      const response = await fetch("http://localhost:3000/api/checkout", {
+      const response = await fetch("https://figma-ui-ux-hackathon-mu.vercel.app/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,6 +89,7 @@ const CheckoutForm: React.FC = () => {
   };
 
   return (
+   
     <div className={`font-clash max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg`}>
       <h2 className="text-3xl font-bold text-center mb-8">Checkout</h2>
 
@@ -237,6 +238,7 @@ const CheckoutForm: React.FC = () => {
         </button>
       </form>
     </div>
+   
   );
 };
 
