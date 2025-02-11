@@ -2,12 +2,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import { CartProvider } from "./context/CartContext";
-import { WishlistProvider } from "./context/WishlistContext";
-import ClientLoader from "./components/ClientLoader";
-// import ClerkProviderWrapper from "./components/ClerkProvider"; // 👈 Import the client wrapper
+import ClerkProviderWrapper from "./components/ClerkProvider"; // 👈 Import the client wrapper
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,19 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* <ClerkProviderWrapper> 👈 Wrap everything inside ClerkProviderWrapper */}
-          <CartProvider>
-            <WishlistProvider>
-              <ClientLoader>
-                <div className="mx-auto xxs:max-w-[534px] xs:max-w-[639px] sm:max-w-[767px] md:max-w-[1023px] lg:max-w-[1334px] xl:max-w-[1440px] overflow-x-hidden text-[#2A254B]">
-                  <Navbar />
-                  {children}
-                  <Footer />
-                </div>
-              </ClientLoader>
-            </WishlistProvider>
-          </CartProvider>
-        {/* </ClerkProviderWrapper> */}
+        <ClerkProviderWrapper> 
+      {children}
+        </ClerkProviderWrapper>
       </body>
     </html>
   );

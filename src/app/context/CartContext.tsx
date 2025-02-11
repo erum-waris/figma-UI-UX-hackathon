@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 // Define Cart Item Type
-type CartItem = {
+export type CartItem = {
   slug: string;
   name: string;
   price: number;

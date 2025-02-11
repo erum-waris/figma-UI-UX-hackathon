@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -13,7 +11,14 @@ import { Category, Product } from "../../../../types/Types";
 import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { useWishlist } from "@/app/context/WishlistContext";
-
+import { useUser, SignOutButton, SignUpButton } from "@clerk/nextjs";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/Popover";
+import { Button } from "@/components/ui/Button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/Avatar";
 function DownNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -24,7 +29,7 @@ function DownNavbar() {
   const [productData, setProductData] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-
+  const { user } = useUser();
   // Fetch categories from Sanity
   useEffect(() => {
     const fetchCategories = async () => {
@@ -90,16 +95,16 @@ function DownNavbar() {
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-center items-center mt-2">
         <ul className="md:grid md:grid-cols-5 lg:flex gap-8 text-[#726E8D] font-satoshi text-[1.5rem] font-400">
-          
-        <NavbarLinks href="/" title="Home" />
+          <NavbarLinks href="/" title="Home" />
           <NavbarLinks href="/about" title="About" />
           <NavbarLinks href="/productlisting" title="Products" />
-          
-          {categories.map((category:Category) => (
-            
+
+          {categories.map((category: Category) => (
             <li key={category.slug.current}>
-              
-              <NavbarLinks href={`/category/${category.slug}`} title={category.name} />
+              <NavbarLinks
+                href={`/category/${category.slug}`}
+                title={category.name}
+              />
             </li>
           ))}
         </ul>
@@ -108,17 +113,25 @@ function DownNavbar() {
       {/* Mobile Navbar */}
       <div className="md:hidden flex justify-between items-center px-4 py-3">
         {/* Logo */}
-        <div className="font-satoshi text-[#22202E] text-[24px] font-bold">Avion</div>
+        <div className="font-satoshi text-[#22202E] text-[24px] font-bold">
+          Avion
+        </div>
 
         {/* Search and Hamburger Icon */}
         <div className="flex items-center gap-5">
           {/* Search Icon */}
-          <span className="text-[24px] text-black cursor-pointer" onClick={toggleSearch}>
+          <span
+            className="text-[24px] text-black cursor-pointer"
+            onClick={toggleSearch}
+          >
             <CiSearch />
           </span>
 
           {/* Hamburger Menu Icon */}
-          <div className="flex flex-col justify-between w-8 h-[20px] cursor-pointer" onClick={toggleMenu}>
+          <div
+            className="flex flex-col justify-between w-8 h-[20px] cursor-pointer"
+            onClick={toggleMenu}
+          >
             {isMenuOpen ? (
               <Image
                 src="/images/cross.png"
@@ -142,44 +155,99 @@ function DownNavbar() {
       {isMenuOpen && (
         <div className="flex flex-col bg-white w-full px-4 py-6">
           <ul className="flex flex-col items-center gap-5 text-black text-xl mb-4">
-          
-          <NavbarLinks href="/" title="Home" />
-          <NavbarLinks href="/about" title="About" />
-          <NavbarLinks href="/productlisting" title="Products" />
-            {categories.map((category) => (
-             
-              <li key={category.slug.current}>
-                <NavbarLinks href={`/category/${category.slug.current}`} title={category.name} />
-      
-              </li>
-            ))}
+            <NavbarLinks href="/" title="Home" />
+            <NavbarLinks href="/about" title="About" />
+            <NavbarLinks href="/productlisting" title="Products" />
+           
+          {categories.map((category: Category) => (
+            <li key={category.slug.current}>
+              <NavbarLinks
+                href={`/category/${category.slug}`}
+                title={category.name}
+              />
+            </li>
+          ))}
           </ul>
-           {/* Cart, Wishlist, and User Icons */}
+          {/* Cart, Wishlist, and User Icons */}
           <div className="md:hidden flex justify-center items-center gap-6 text-2xl">
-      <Link href="/wishlist">
-        <button className="relative">
-          <FaRegHeart />
-          {wishlist?.length > 0 && (
-            <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-1">
-              {wishlist.length}
-            </span>
-          )}
-        </button>
-      </Link>
-      <Link href="/cart">
-        <button className="relative">
-          <PiShoppingCartBold />
-          {cart?.length > 0 && (
-            <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-1">
-              {cart.length}
-            </span>
-          )}
-        </button>
-      </Link>
-      <Link href="/profile">
-        <FaRegUserCircle />
-      </Link>
-    </div>
+            <Link href="/wishlist">
+              <button className="relative">
+                <FaRegHeart />
+                {wishlist?.length > 0 && (
+                  <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-1">
+                    {wishlist.length}
+                  </span>
+                )}
+              </button>
+            </Link>
+            <Link href="/cart">
+              <button className="relative">
+                <PiShoppingCartBold />
+                {cart?.length > 0 && (
+                  <span className="absolute -top-2 -right-2 text-sm bg-red-500 text-white rounded-full px-1">
+                    {cart.length}
+                  </span>
+                )}
+              </button>
+            </Link>
+            {/* User Avatar with Popover */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" className="p-0">
+                  <Avatar className="w-9 h-9 border border-gray-300">
+                    <AvatarImage
+                      src={user ? user.imageUrl : "/images/User--avatar.svg"}
+                      alt="User Avatar"
+                    />
+                    <AvatarFallback>
+                      <FaRegUserCircle className="text-xl" />
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </PopoverTrigger>
+
+              {/* Popover Content */}
+              <PopoverContent className="p-4 bg-white shadow-lg rounded-md w-56">
+                {user ? (
+                  <div className="text-center">
+                    <Avatar className="w-12 h-12 mx-auto mb-2">
+                      <AvatarImage src={user.imageUrl} alt="User Avatar" />
+                      <AvatarFallback>
+                        <FaRegUserCircle />
+                      </AvatarFallback>
+                    </Avatar>
+                    <p className="text-sm font-medium">{user.fullName}</p>
+                    <p className="text-xs text-gray-500">
+                      {user.primaryEmailAddress?.emailAddress}
+                    </p>
+
+                    <div className="mt-3 flex flex-col gap-2">
+                      <Button asChild variant="outline" className="w-full">
+                        <Link href="/profile">View Profile</Link>
+                      </Button>
+
+                      <SignOutButton>
+                        <Button variant="destructive" className="w-full">
+                          Sign Out
+                        </Button>
+                      </SignOutButton>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <p className="text-sm text-gray-500 mb-2">
+                      You are not signed in
+                    </p>
+                    <SignUpButton>
+                      <Button variant="default" className="w-full">
+                        Sign Up
+                      </Button>
+                    </SignUpButton>
+                  </div>
+                )}
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       )}
 
@@ -220,18 +288,15 @@ function DownNavbar() {
                     </button>
                   </Link>
                 </li>
-                
               ))}
-          
             </ul>
-            
           ) : (
-            searchQuery && <p className="mt-2 text-gray-500">No products found.</p>
+            searchQuery && (
+              <p className="mt-2 text-gray-500">No products found.</p>
+            )
           )}
         </div>
       )}
-
-     
     </div>
   );
 }

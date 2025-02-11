@@ -1,9 +1,7 @@
-
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { GrSearch } from "react-icons/gr";
-import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
+ import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
 import { PiShoppingCartBold } from "react-icons/pi";
 import Link from "next/link";
 import { useWishlist } from "@/app/context/WishlistContext";
@@ -11,15 +9,24 @@ import { useCart } from "@/app/context/CartContext";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { Product } from "../../../../types/Types";
+import { useUser, SignOutButton, SignUpButton } from "@clerk/nextjs";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/Popover";
+import { Button } from "@/components/ui/Button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/Avatar";
 
 function UpNavbar() {
   const { wishlist } = useWishlist();
   const { cart } = useCart();
+  const { user } = useUser();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [productData, setProductData] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-
+  
   // Toggle search box visibility
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
 
@@ -36,12 +43,11 @@ function UpNavbar() {
             "image": image.asset->url
           }`
         );
-        setProductData(products); // Save fetched products to state
+        setProductData(products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -72,8 +78,8 @@ function UpNavbar() {
         {/* Center: Brand Name */}
         <h1 className="text-3xl font-bold font-satoshi">Avion</h1>
 
-        {/* Right Side: Wishlist, Cart, and User Icons */}
-        <div className="flex gap-6 text-3xl">
+        {/* Right Side: Wishlist, Cart, and User Avatar */}
+        <div className="flex items-center gap-6 text-3xl">
           <Link href="/wishlist">
             <button className="relative">
               <FaRegHeart />
@@ -94,9 +100,60 @@ function UpNavbar() {
               )}
             </button>
           </Link>
-          <Link href="/profile">
-            <FaRegUserCircle />
-          </Link>
+
+          {/* User Avatar with Popover */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" className="p-0">
+                <Avatar className="w-9 h-9 border border-gray-300">
+                  <AvatarImage
+                    src={user ? user.imageUrl : "/images/User--avatar.svg"}
+                    alt="User Avatar"
+                  />
+                  <AvatarFallback><FaRegUserCircle className="text-xl" /></AvatarFallback>
+                </Avatar>
+              </Button>
+            </PopoverTrigger>
+
+            {/* Popover Content */}
+            <PopoverContent className="p-4 bg-white shadow-lg rounded-md w-56">
+              {user ? (
+                <div className="text-center">
+                  <Avatar className="w-12 h-12 mx-auto mb-2">
+                    <AvatarImage src={user.imageUrl} alt="User Avatar" />
+                    <AvatarFallback><FaRegUserCircle /></AvatarFallback>
+                  </Avatar>
+                  <p className="text-sm font-medium">{user.fullName}</p>
+                  <p className="text-xs text-gray-500">
+                    {user.primaryEmailAddress?.emailAddress}
+                  </p>
+
+                  <div className="mt-3 flex flex-col gap-2">
+                    <Button asChild variant="outline" className="w-full">
+                      <Link href="/profile">View Profile</Link>
+                    </Button>
+
+                    <SignOutButton>
+                      <Button variant="destructive" className="w-full">
+                        Sign Out
+                      </Button>
+                    </SignOutButton>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <p className="text-sm text-gray-500 mb-2">
+                    You are not signed in
+                  </p>
+                  <SignUpButton>
+                    <Button variant="default" className="w-full">
+                      Sign Up
+                    </Button>
+                  </SignUpButton>
+                </div>
+              )}
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
 
@@ -108,7 +165,7 @@ function UpNavbar() {
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full border placeholder:text-black bg-black/10 text-black border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+            className="w-full border border-gray-300 bg-gray-100 text-black rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black"
           />
           {/* Display filtered products */}
           {filteredProducts.length > 0 ? (
@@ -132,7 +189,7 @@ function UpNavbar() {
                     </div>
                   </div>
                   <Link href={`/productlisting/${product.slug}`}>
-                    <button className="text-white border border-black bg-blue-950 px-4 py-2 rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
+                    <button className="text-white bg-blue-950 px-4 py-2 rounded-md hover:bg-gray-200 hover:text-blue-950 hover:border-black hover:border-2">
                       Details
                     </button>
                   </Link>

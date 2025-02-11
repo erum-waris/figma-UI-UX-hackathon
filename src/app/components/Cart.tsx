@@ -71,8 +71,8 @@ const Shopping = () => {
                         alt={item.name}
                         quality={75}
                         priority
-                        className="rounded-md w-full h-[400px] md:ml-10 lg:ml-[50px] lg:w-[400px] lg:h-80 object-fit"
-                      />
+                        className="rounded-md w-full h-[200px] md:ml-10 lg:ml-[50px] lg:w-[200px] lg:h-40 object-fit"/>
+                      
                       <div className="flex-grow text-center mt-5">
                         <h1 className="sm:text-2xl text-lg font-clash font-semibold">
                           {item.name}
@@ -166,3 +166,4 @@ const Shopping = () => {
 };
 
 export default Shopping;
+

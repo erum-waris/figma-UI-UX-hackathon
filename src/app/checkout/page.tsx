@@ -1,29 +1,18 @@
+
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-
-
+import { useCart } from "@/app/context/CartContext"; // ✅ Import useCart
+import Image from "next/image";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const CheckoutForm: React.FC = () => {
-  interface OrderItem {
-    name: string;
-    price: number;
-    quantity: number;
-  }
-
-  const [formData, setFormData] = useState<{
-    customerName: string;
-    email: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    country: string;
-    phone: string;
-    orderItems: OrderItem[];
-    totalAmount: number;
-  }>({
+  const { grandTotal, cart, removeFromCart } = useCart();
+  const router = useRouter();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [formData, setFormData] = useState({
     customerName: "",
     email: "",
     address: "",
@@ -31,26 +20,17 @@ const CheckoutForm: React.FC = () => {
     postalCode: "",
     country: "",
     phone: "",
-    orderItems: [], // Initially empty
-    totalAmount: 0, // Initially zero
+    orderItems: cart, // ✅ Direct cart data set
+    grandTotal: grandTotal,
   });
-  const router = useRouter();
 
   useEffect(() => {
-    // Retrieve order items and total amount from localStorage
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const total = savedCart.reduce(
-      (acc: number, item: { price: number; quantity: number }) =>
-        acc + item.price * item.quantity,
-      0
-    );
-
     setFormData((prevData) => ({
       ...prevData,
-      orderItems: savedCart,
-      totalAmount: total,
+      orderItems: cart,
+      grandTotal: grandTotal,
     }));
-  }, []);
+  }, [cart, grandTotal]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -64,7 +44,8 @@ const CheckoutForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form data being submitted:", formData);
+    console.log("Submitting order:", formData);
+
     try {
       const response = await fetch("https://figma-ui-ux-hackathon-mu.vercel.app/api/checkout", {
         method: "POST",
@@ -73,11 +54,10 @@ const CheckoutForm: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
+//  https://figma-ui-ux-hackathon-mu.vercel.app/
+//  https://localhost:3000
+      if (!response.ok) throw new Error("Failed to submit order.");
 
-      if (!response.ok) {
-        throw new Error("Failed to submit order.");
-      }
-       
       const result = await response.json();
       console.log(result);
       alert("Order submitted successfully!");
@@ -89,14 +69,17 @@ const CheckoutForm: React.FC = () => {
   };
 
   return (
-   
-    <div className={`font-clash max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg`}>
+    <div className="font-clash max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold text-center mb-8">Checkout</h2>
 
+      {/* Checkout Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="customerName" className="block font-semibold text-lg">
+            <label
+              htmlFor="customerName"
+              className="block font-semibold text-lg"
+            >
               Name:
             </label>
             <input
@@ -107,10 +90,9 @@ const CheckoutForm: React.FC = () => {
               value={formData.customerName}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
-
           <div>
             <label htmlFor="email" className="block font-semibold text-lg">
               Email:
@@ -123,7 +105,7 @@ const CheckoutForm: React.FC = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
         </div>
@@ -141,10 +123,9 @@ const CheckoutForm: React.FC = () => {
               value={formData.address}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
-
           <div>
             <label htmlFor="city" className="block font-semibold text-lg">
               City:
@@ -157,7 +138,7 @@ const CheckoutForm: React.FC = () => {
               value={formData.city}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
         </div>
@@ -175,10 +156,9 @@ const CheckoutForm: React.FC = () => {
               value={formData.postalCode}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
-
           <div>
             <label htmlFor="country" className="block font-semibold text-lg">
               Country:
@@ -191,54 +171,90 @@ const CheckoutForm: React.FC = () => {
               value={formData.country}
               onChange={handleInputChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="phone" className="block font-semibold text-lg">
-              Phone:
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="Your Phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
+        <div>
+          <label htmlFor="phone" className="block font-semibold text-lg">
+            Phone:
+          </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="Your Phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md"
+          />
         </div>
-
-        <div className="my-8">
-          <h3 className="font-semibold text-xl">Order Summary</h3>
-          <ul className="space-y-4">
-            {formData.orderItems.map((item, index) => (
-              <li key={index} className="flex justify-between">
-                <span>{item.name} (x{item.quantity})</span>
-                <span>${item.price * item.quantity}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="flex justify-between font-semibold">
-            <span>Total</span>
-            <span>${formData.totalAmount}</span>
+    {/* Order Details */}
+    <ul className="space-y-4 mb-8">
+          {cart.map((item) => (
+            <li key={item.slug} className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 p-4 border rounded-md bg-gray-100">
+              {/* Product Image */}
+              <div className="relative w-full h-[100px] md:w-[150px] md:h-[150px]">
+        {/* Show Loader Only If Image is Not Loaded & No Error */}
+        {!imageLoaded && !imageError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-300 animate-pulse rounded-md">
+            <p className="text-gray-500 text-sm">Loading...</p>
           </div>
-        </div>
+        )}
 
+        {/* Image */}
+        {!imageError ? (
+          <Image
+            src={item.image}
+            width={150}
+            height={150}
+            alt={item.name}
+            className="rounded-md w-full h-full object-cover"
+            onLoad={() => setImageLoaded(true)} // Hide loader when image loads
+            onError={() => setImageError(true)} // Handle broken/missing images
+          />
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-gray-400 text-white rounded-md">
+            Image Not Found
+          </div>
+        )}
+      </div>
+
+      {/* Product Details */}
+      <div className="flex flex-col justify-center items-center">
+        <h3 className="text-lg font-semibold">{item.name}</h3>
+        <p className="text-sm md:text-md">
+          £{item.price} x {item.quantity} = <span className="font-bold">£{item.price * item.quantity}</span>
+        </p>
+        
+        {/* Remove Button */}
+        <button
+          className="mt-2 bg-red-500 text-white p-2 rounded-md text-sm hover:bg-red-700 transition w-32"
+          onClick={() => removeFromCart(item.slug)}
+        >
+          <AiOutlineDelete size={20} className="inline-block" /> 
+        </button>
+      </div>
+    
+ 
+          
+            </li>
+          ))}
+        </ul>
+        <div className="flex justify-between font-semibold mt-4 border-t pt-4">
+          <span>Total Amount </span> 
+          <span>£{grandTotal.toFixed(2)}</span>
+        </div>
         <button
           type="submit"
-          className="w-full py-3 bg-[#2A254B]   text-white rounded-md transition duration-200"
+          className="w-full py-3 bg-[#2A254B] text-white rounded-md transition duration-200 hover:bg-white hover:text-[#2A254B] border-2 border-[#2A254B]"
         >
           Submit Order
         </button>
       </form>
     </div>
-   
   );
 };
 

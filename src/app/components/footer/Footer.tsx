@@ -87,7 +87,7 @@ const Footer = () => {
   <p className="text-center font-satoshi font-normal leading-[18.9px] text-white md:text-lg md:mt-8">
     Copyright 2022 Avion LTD
   </p>
-  <div className="flex mt-10 md:ml-4 gap-3 justify-center md:justify-between items-center">
+  <div className="flex mt-10 md:ml-4 gap-3 justify-center items-center  md:justify-between">
     <Link href="/"><FaLinkedin className="w-[24px] h-[24px] text-white" /></Link>
     <Link href="/"><FaFacebookSquare className="w-[24px] h-[24px] text-white" /></Link>
     <Link href="/"><FaInstagram className="w-[24px] h-[24px] text-white" /></Link>
@@ -96,7 +96,9 @@ const Footer = () => {
     <Link href="/"><FaPinterest className="w-[24px] h-[24px] text-white" /></Link>
   </div>
 </div>
-
+<p className="text-center font-satoshi font-normal leading-[18.9px] text-white md:text-lg md:mt-8">
+    FrontEnd Developer ERUM WARIS
+  </p>
     </div>
   );
 };
